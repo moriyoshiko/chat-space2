@@ -27,8 +27,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|body|text|index:true, null: false|
-|image|string|null: false, foreign_key: true|
+|body|text|index:true|
+|image|string||
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 
