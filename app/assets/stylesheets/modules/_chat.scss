@@ -12,8 +12,8 @@
         margin-top: 35px;
       }
       &__members {
-        color: #999;
-        display: flex;
+        @include flexbox;
+        color: $light_gray;
         font-size: 12px;
         margin-top: 15px;
         .member {
@@ -30,6 +30,10 @@
       line-height: 40px;
       margin-top: 28px;
       padding: 0 20px;
+      &__button {
+        color: $light_blue;
+        text-decoration: none;
+      }
     }
   }
 
@@ -75,12 +79,12 @@
       height: 50px;
       width: calc(100% - 160px);
     }
-    &__image {
+    &__mask {
       background-color: $white;
       float: left;
       height: 50px;
       padding-right: 10px;
-      &__icon {
+      &__image {
         font-size: 20px;
         line-height: 50px;
       }
@@ -88,7 +92,7 @@
         display: none;
       }
     }
-    &__submit-btn {
+    &__submit {
       background-color: $light_blue;
       border: none;
       color: $white;
