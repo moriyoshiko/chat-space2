@@ -2,51 +2,23 @@
 
   = render 'shared/side_bar'
 
-  .chat-main
-    .header-bar
+  .chat
+    .header
       .left-header
         .left-header__title
-          グループ名
+          = @group.name
         %ul.left-header__members
-          Member：
-          %li.member
-            メンバー名
-          %li.member
-            メンバー名
-          %li.member
-            メンバー名
+          Members:
+          - @group.users .each do |user|
+            %li.member
+              = user.name
       .right-header
         .right-header__button
-          Edit
+          = link_to edit_group_path(@group) do
+            Edit
     .messages
       = render @messages
-      / .message-box
-      /   .upper-message
-      /     .upper-message__user-name
-      /       メンバー
-      /     .upper-message__date
-      /       2019/02/19
-      /   .lower-meesage
-      /     .lower-message__content
-      /       メッセージ
-      / .message-box
-      /   .upper-message
-      /     .upper-message__user-name
-      /       メンバー
-      /     .upper-message__date
-      /       2019/02/20
-      /   .lower-meesage
-      /     .lower-message__content
-      /       メッセージ
-      / .message-box
-      /   .upper-message
-      /     .upper-message__user-name
-      /       メンバー
-      /     .upper-message__date
-      /       2017/02/21
-      /   .lower-meesage
-      /     .lower-message__content
-      /       メッセージ
+
     .form
       = form_for [@group, @message] do |f|
         = f.text_field :content, class: 'form__message', placeholder: 'type a message'
@@ -54,4 +26,7 @@
           = f.label :image, class: 'form__mask__image' do
             = fa_icon 'picture-o', class: 'icon'
             = f.file_field :image, class: 'hidden'
-        = f.submit 'Send', class: 'form__submit'
+          = f.submit 'Send', class: 'form__submit'
+
+
+
