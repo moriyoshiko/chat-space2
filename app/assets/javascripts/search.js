@@ -47,7 +47,7 @@ $(function() {
 
   var member_list = $("#chat-group-users");
 
-  function changeUser(userName, userId) {
+  function buildMemberHTML(userName, userId) {
     var html =`<div class='chat-group-user clearfix js-chat-member' id='${ userId }'>
                  <input name='group[user_ids][]' type='hidden' value='${ userId }'>
                    <p class='chat-group-user__name'>
@@ -63,7 +63,7 @@ $(function() {
     $(this).parent().remove();
     var userName = $(this).data('userName');
     var userId = $(this).data('userId');
-    changeUser(userName, userId);
+    buildMemberHTML(userName, userId);
   });
 
   $(document).on('click', '.user-search-remove', function(){
