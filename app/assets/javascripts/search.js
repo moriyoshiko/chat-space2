@@ -2,7 +2,7 @@ $(function() {
 
  var search_list = $('#user-search-result');
 
-  function appendProduct(user) {
+  function appendUser(user) {
   var html = `<div class="chat-group-user clearfix">
                 <p class="chat-group-user__name"> 
                   ${ user.name }
@@ -33,7 +33,7 @@ $(function() {
       $('#user-search-result').empty();
       if (users.length !== 0) {
         users.forEach(function(user){
-          appendProduct(user);
+          appendUser(user);
         });
       }
       else {
@@ -45,7 +45,7 @@ $(function() {
     })
   });
 
-  var change_list = $("#chat-group-users");
+  var member_list = $("#chat-group-users");
 
   function changeUser(userName, userId) {
     var html =`<div class='chat-group-user clearfix js-chat-member' id='${ userId }'>
@@ -56,7 +56,7 @@ $(function() {
                    <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>
                    削除</a>
               </div>`
-    change_list.append(html);
+    member_list.append(html);
   }
 
   $(document).on('click', '.user-search-add', function(){
