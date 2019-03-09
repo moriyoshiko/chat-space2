@@ -24,6 +24,10 @@
     .chat-group-form__field--left
       %label.chat-group-form__label{:for => "chat_group_チャットメンバー"} チャットメンバー
     .chat-group-form__field--right#chat-group-users
+    / %ul
+    /   - @group.users .each do |user|
+    /     .group_member= user.name
+
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
