@@ -1,6 +1,7 @@
 $(function() {
-  function buildHTML(message){
-  var html = `<div class="message">
+  function buildSendMessageHTML(message){
+  var imageHtml = (message.imageUrl) ? `<img src=${ message.imageUrl }>` : ""
+  var html = `<div class="message" data-id='${message.id}'>
 	            <div class="upper-message">
 	              <div class="upper-message__user-name">
 	                ${ message.user_name }
@@ -14,7 +15,7 @@ $(function() {
 	                ${ message.content }
 	              </p>
                 <div class="lower-message__image">
-                  ${ message.image }
+                  ${ imageHtml }
                 </div>
 	            </div>
 	          </div>`;
@@ -27,7 +28,7 @@ $(function() {
 
   $('#new_message').on('submit', function(e) {
     e.preventDefault();
-    var formDate = new FormData(this);
+    var formData = new FormData(this);
     var url = $(this).attr('action')
     $.ajax({
     	url: url,
@@ -37,14 +38,52 @@ $(function() {
     	processData: false,
     	contentType: false
     })
-    .done(function(data){
-      var html = buildHTML(data);
+    .done(function(NewMessage){
+      var html = buildSendMessageHTML(data);
       $('.messages').append(html);
       $('.form__message').reset();
+      $('#message_image').reset() //messageを送信したら、formのimageを空にする
+      $('.form__submit').prop('disabled', false)
       scroll()
     })
     .fail(function(){
       alert('error');
     })
   });
+
+  //自動更新
+  if (location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(appendNewMsg, 5000);
+  }
+
+  function appendNewMsg(message){
+    if ($('.messages')[0]) {
+      var message_latest_id = $('.message:last').data('id');
+    } else {
+      var message_latest_id = 0
+    }
+
+    $.ajax({
+      url: location.href,
+      type: 'GET',
+      data: {
+        message: { id: message_latest_id }
+      },
+      dataType: 'json'
+    })
+    .done(function(data) {
+      data.forEach(function(message) {
+        var html = buildSendMessageHTML(message);
+        $('.messages').append(html);
+      })
+    })
+    .fail(function(data) {
+      alert('自動更新に失敗しました')
+    })
+  }
+
 });
+
+
+
+
