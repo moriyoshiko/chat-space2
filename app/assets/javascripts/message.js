@@ -53,10 +53,10 @@ $(function() {
 
   //自動更新
   if (location.href.match(/\/groups\/\d+\/messages/)) {
-    setInterval(update, 5000);
+    setInterval(appendNewMsg, 5000);
   }
 
-  function update(message){
+  function appendNewMsg(message){
     if ($('.messages')[0]) {
       var message_latest_id = $('.message:last').data('id');
     } else {
