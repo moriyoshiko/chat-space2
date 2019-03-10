@@ -5,3 +5,4 @@ json.array! @new_messages do |message|
   json.imageURL message.image.url
   json.id message.id
 end
+
