@@ -38,11 +38,11 @@ $(function() {
     	processData: false,
     	contentType: false
     })
-    .done(function(NewMessageData){
+    .done(function(NewMessage){
       var html = buildSendMessageHTML(data);
       $('.messages').append(html);
-      $('.form__message').val("");
-      $('#message_image').val("") //messageを送信したら、formのimageを空にする
+      $('.form__message').reset();
+      $('#message_image').reset() //messageを送信したら、formのimageを空にする
       $('.form__submit').prop('disabled', false)
       scroll()
     })
