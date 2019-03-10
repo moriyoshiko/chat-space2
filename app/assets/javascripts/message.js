@@ -1,7 +1,7 @@
 $(function() {
-  function buildHTML(message){
+  function buildSendMessageHTML(message){
   var imageHtml = (message.imageUrl) ? `<img src=${ message.imageUrl }>` : ""
-  var html = `<div class="message">
+  var html = `<div class="message" data-id='${message.id}'>
 	            <div class="upper-message">
 	              <div class="upper-message__user-name">
 	                ${ message.user_name }
@@ -38,8 +38,8 @@ $(function() {
     	processData: false,
     	contentType: false
     })
-    .done(function(data){
-      var html = buildHTML(data);
+    .done(function(NewMessageData){
+      var html = buildSendMessageHTML(data);
       $('.messages').append(html);
       $('.form__message').val("");
       $('#message_image').val("") //messageを送信したら、formのimageを空にする
@@ -52,29 +52,28 @@ $(function() {
   });
 
   //自動更新
-  $(function() {
-    if(location.href.match(/\/groups\/\d+\/messages/)) {
-      setInterval(update, 10000);
-    }
-  });
+  if (location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(update, 5000);
+  }
 
-  function update(){
-    if($('.messages')[0]){
-      var message_id = $('.messages:last').data('id');
+  function update(message){
+    if ($('.messages')[0]) {
+      var message_latest_id = $('.message:last').data('id');
     } else {
-      var message_id = 0
+      var message_latest_id = 0
     }
+
     $.ajax({
       url: location.href,
       type: 'GET',
       data: {
-      message: { id: message_id }
+        message: { id: message_latest_id }
       },
       dataType: 'json'
     })
     .done(function(data) {
-      data.forEach(function(data) {
-        var html = buildHTML(data);
+      data.forEach(function(message) {
+        var html = buildSendMessageHTML(message);
         $('.messages').append(html);
       })
     })
@@ -84,6 +83,7 @@ $(function() {
   }
 
 });
+
 
 
 
