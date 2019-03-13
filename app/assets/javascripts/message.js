@@ -39,7 +39,7 @@ $(function() {
     	contentType: false
     })
     .done(function(NewMessage){
-      var html = buildSendMessageHTML(data);
+      var html = buildSendMessageHTML(message);
       $('.messages').append(html);
       $('.form__message').reset();
       $('#message_image').reset() //messageを送信したら、formのimageを空にする
@@ -53,7 +53,7 @@ $(function() {
 
   //自動更新
   if (location.href.match(/\/groups\/\d+\/messages/)) {
-    setInterval(appendNewMsg, 5000);
+    setInterval(appendNewMsg, 10000);
   }
 
   function appendNewMsg(message){
