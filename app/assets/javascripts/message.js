@@ -24,6 +24,10 @@ $(function() {
 
   function scroll() {
     $('.messages').animate({scrollTop: $('.message')[0].scrollHeight});
+//     var element = document.getElementById(".messages");
+// 　  var rect = element.offsetTop();
+// 　  var positionY = rect.top;
+// 　  element.scrollTo(0, positionY);
   }
 
   $('#new_message').on('submit', function(e) {
@@ -39,11 +43,11 @@ $(function() {
     	contentType: false
     })
     .done(function(NewMessage){
-      var html = buildSendMessageHTML(message);
+      var html = buildSendMessageHTML(NewMessage);
       $('.messages').append(html);
-      $('.form__message').reset();
-      $('#message_image').reset() //messageを送信したら、formのimageを空にする
-      $('.form__submit').prop('disabled', false)
+      $('.form__message').val("");
+      $('#message_image').val(""); //messageを送信したら、formのimageを空にする
+      $('.form__submit').prop('disabled', false);
       scroll()
     })
     .fail(function(){
