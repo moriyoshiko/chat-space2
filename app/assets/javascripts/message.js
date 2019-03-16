@@ -24,10 +24,6 @@ $(function() {
 
   function scroll() {
     $('.messages').animate({scrollTop: $('.message')[0].scrollHeight});
-//     var element = document.getElementById(".messages");
-// 　  var rect = element.offsetTop();
-// 　  var positionY = rect.top;
-// 　  element.scrollTo(0, positionY);
   }
 
   $('#new_message').on('submit', function(e) {
