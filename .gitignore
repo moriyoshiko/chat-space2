@@ -19,3 +19,6 @@
 public/uploads/*
 
 user-materials/
+
+config/secrets.yml
+
