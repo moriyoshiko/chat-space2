@@ -40,10 +40,11 @@
   .messages {
     background-color: #FAFAFA;
     box-sizing: border-box;
-    padding: 46px 40px 0;
+    padding: 46px 40px 50px;
     overflow: auto;
     height: calc(100vh - 100px - 90px);
     .message {
+      margin-top: 40px;
       .upper-message {
         display: flex;
         &__user-name {
@@ -58,11 +59,13 @@
         }
       }
       .lower-message {
-        margin-top: 10px;
+        // margin-top: 30px;
+        // margin-bottom: 30px;
+        // padding-bottom: 50px;
         &__content {
           color: $black;
           font-size: 14px;
-          margin-bottom: 40px;
+          margin-bottom: 10px;
         }
       }
     }
