@@ -40,11 +40,12 @@
   .messages {
     background-color: #FAFAFA;
     box-sizing: border-box;
-    padding: 46px 40px 50px;
+    padding: 10px 10px 20px;
     overflow: auto;
     height: calc(100vh - 100px - 90px);
     .message {
-      margin-top: 40px;
+      // margin-top: 20px;
+      margin-bottom: 20px;
       .upper-message {
         display: flex;
         &__user-name {
