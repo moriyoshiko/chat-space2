@@ -5,10 +5,10 @@ $(function() {
   var html = `<div class="chat-group-user clearfix">
                 <p class="chat-group-user__name">
                   ${ user.name }
-                </p>
-                <a class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="${ user.id }" data-user-name="${ user.name }">
+                <span class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="${ user.id }" data-user-name="${ user.name }">
                   追加
-                </a>
+                </span>
+               </p>
               </div>`
     search_list.append(html);
   }
@@ -31,8 +31,8 @@ $(function() {
     .done(function(users){
       $('#user-search-result').empty();
       if (users.length !== 0) {
-        users.forEach(function(user){
-          appendUser(user);
+        users.forEach(function(users){
+          appendUser(users);
         });
       } else {
         appendErrMsgToHTML("一致するユーザが見つかりません");
@@ -52,10 +52,10 @@ $(function() {
           <input name='group[user_ids][]' type='hidden' value='${ userId }'>
           <p class='chat-group-user__name'>
             ${ userName }
-          </p>
-          <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>
+          <span class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>
             削除
-          </a>
+          </span>
+          </p>
         </div>
       `
     member_list.append(html);
@@ -72,8 +72,10 @@ $(function() {
     $(this).parent().remove();
   });
 
+  // turbolinksによってページ遷移先にsetIntervalが引き継がれるバグを解消
+  $(this).on('turbolinks:click', function() {
+    clearInterval(timer);
+  });
+
 });
-
-
-
 
