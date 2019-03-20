@@ -23,7 +23,6 @@ class GroupsController < ApplicationController
   def update
     if @group.update(group_params)
       redirect_to group_messages_path(@group), notice: 'グループを編集しました'
-      # binding.pry
     else
       render :edit
     end
@@ -37,8 +36,6 @@ class GroupsController < ApplicationController
   def set_group
     id = params[:group_id] || params[:id]
     @group = Group.find(id)
-
-  #   binding.pry
   end
 end
 
