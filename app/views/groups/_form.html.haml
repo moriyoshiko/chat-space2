@@ -12,15 +12,52 @@
       .chat-group-form__search.clearfix
         %input#user-search-field.chat-group-form__input{ placeholder: '追加したいユーザー名を入力してください', type: 'text' }
       #user-search-result
-    .chat-group-form__field.clearfix
-      .chat-group-form__field--left
-        = f.label :name, "チャットメンバー", class: "chat-group-form__label"
-      .chat-group-form__field--right
-        #chat-group-users
-          .chat-group-user.clearfix
-            = hidden_field_tag 'group[user_ids][]', current_user.id
-            %p.chat-group-user__name
-              = current_user.name
-          = render @group.users
   .chat-group-form__field.clearfix
-    = f.submit 'Save', class: 'chat-group-form__action-btn'
+    .chat-group-form__field--left
+      %label.chat-group-form__label{for: "chat_group_チャットメンバー"} チャットメンバー
+    .chat-group-form__field--right#chat-group-users
+      .chat-group-user
+        %input{type: "hidden", value: current_user.id, name: "group[user_ids][]"}
+          = content_tag(:p, current_user.name ,class: 'chat-group-current-user')
+        = render partial: 'group_form_user', collection: @users, as: :user
+
+  .chat-group-form__field
+    .chat-group-form__field--left
+    .chat-group-form__field--right
+      = f.submit 'Save', class: 'chat-group-form__action-btn'
+
+
+
+/ =form_for @group do |f|
+/   .chat-group-form__field
+/     .chat-group-form__field--left
+/       %label.chat-group-form__label{for: "chat_group_name"} グループ名
+/     .chat-group-form__field--right
+/       =f.text_field :name, placeholder: 'グループ名を入力してください'
+
+/     / インクリメンタルサーチ
+/   .chat-group-form__field
+/     .chat-group-form__field--left
+/       %label.chat-group-form__label{:for => "chat_group_チャットメンバーを追加"} チャットメンバーを追加
+/     .chat-group-form__field--right
+/       .chat-group-form__search
+/       = text_field_tag :user_search_field, nil, placeholder: '追加したいユーザー名を入力してください'
+/       #user-search-result
+
+/     / インクリメンタルサーチ結果から追加されたメンバー一覧
+/   .chat-group-form__field
+/     .chat-group-form__field--left
+/       %label.chat-group-form__label{for: "chat_group_チャットメンバー"} チャットメンバー
+/     .chat-group-form__field--right
+/       #chat-group-users
+/         .chat-group-user
+/           %input{type: "hidden", value: current_user.id, name: "group[user_ids][]"}
+/           = content_tag(:p, current_user.name)
+/           / groups#editがリクエストされた時に、グループに既に参加しているメンバーを表示させるための部分テンプレートの呼び出し
+/           / groups#newがリクエストされた場合は、@usersには空の配列がセットされるので、実際のビューには何も表示されない
+/         = render partial: 'group_form_user', collection: @users, as: :user
+
+/   .chat-group-form__field
+/     .chat-group-form__field--left
+/     .chat-group-form__field--right
+/       = f.submit 'Save', class: 'chat-group-form__action-btn'

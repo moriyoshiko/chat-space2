@@ -1,0 +1,5 @@
+%li.chat-group-member.clearfix{user_id: user.id, user_name: user.name}
+  %p.chat-group-member__name= user.name
+  .chat-group-member__btn
+    %p.chat-gruop-member__btn--remove 削除
+  %input{type: "hidden", name: "group[user_ids][]", value: user.id}

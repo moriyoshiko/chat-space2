@@ -2,23 +2,23 @@ $(function() {
 function buildSendMessageHTML(message){
   var imageHtml = (message.imageUrl) ? `<img src=${ message.imageUrl }>` : ""
   var html = `<div class="message" data-id='${message.id}'>
-	            <div class="upper-message">
-	              <div class="upper-message__user-name">
-	                ${ message.user_name }
-	              </div>
-	              <div class="upper-message__date">
-	                ${ message.time }
-	              </div>
-	            </div>
-	            <div class="lower-message">
-	              <p class="lower-message__content">
-	                ${ message.content }
-	              </p>
+              <div class="upper-message">
+                <div class="upper-message__user-name">
+                  ${ message.user_name }
+                </div>
+                <div class="upper-message__date">
+                  ${ message.time }
+                </div>
+              </div>
+              <div class="lower-message">
+                <p class="lower-message__content">
+                  ${ message.content }
+                </p>
                 <div class="lower-message__image">
                   ${ imageHtml }
                 </div>
-	            </div>
-	          </div>`;
+              </div>
+            </div>`;
     return html;
   }
 
@@ -27,16 +27,19 @@ function buildSendMessageHTML(message){
   }
 
   $('#new_message').on('submit', function(e) {
+    if ($('.form__message').val() === "") {
+     alert('メッセージを入力してください');
+    } else {
     e.preventDefault();
     var formData = new FormData(this);
     var url = $(this).attr('action')
     $.ajax({
-    	url: url,
-    	type: "POST",
-    	data: formData,
-    	dataType: 'json',
-    	processData: false,
-    	contentType: false
+      url: url,
+      type: "POST",
+      data: formData,
+      dataType: 'json',
+      processData: false,
+      contentType: false
     })
     .done(function(NewMessage){
       var html = buildSendMessageHTML(NewMessage);
@@ -49,6 +52,8 @@ function buildSendMessageHTML(message){
     .fail(function(){
       alert('error');
     })
+    return false;
+   }
   });
 
   //自動更新
@@ -83,6 +88,4 @@ function buildSendMessageHTML(message){
   }
 
 });
-
-
 
