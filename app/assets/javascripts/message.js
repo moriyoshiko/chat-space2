@@ -1,3 +1,4 @@
+$(document).on("turbolinks:load", function() {
 $(function() {
 function buildSendMessageHTML(message){
   var imageHtml = (message.imageUrl) ? `<img src=${ message.imageUrl }>` : ""
@@ -27,7 +28,7 @@ function buildSendMessageHTML(message){
   }
 
   $('#new_message').on('submit', function(e) {
-    if ($('.form__message').val() === "") {
+    if ($('.form__message').val() === "" && $('#message_image').val() === "") {
      alert('メッセージを入力してください');
     } else {
     e.preventDefault();
@@ -85,7 +86,7 @@ function buildSendMessageHTML(message){
     .fail(function(data) {
       alert('自動更新に失敗しました')
     })
-  }
- return false;
+   }
+  return false;
+ });
 });
-
