@@ -86,6 +86,6 @@ function buildSendMessageHTML(message){
       alert('自動更新に失敗しました')
     })
   }
-
+ return false;
 });
 

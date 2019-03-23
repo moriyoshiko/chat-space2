@@ -70,20 +70,11 @@ $(function() {
     buildMemberHTML(userName, userId);
   });
 
-  //  $(document).on('click', '.user-search-add', function(){
-  //   $(this).parent().remove();
-  //   var userName = $(this).data('userName');
-  //   var userId = $(this).data('userId');
-  //   buildMemberHTML(userName, userId);
-  // });
-
-  // $(document).on('click', '.user-search-remove', function(){
-  //   $(this).parent().remove();
-  // });
   $(document).on('click', '.chat-group-user__btn--remove', function(){
      $(this).parent().remove();
   });
-
+ 
  });
+ return false;
 });
 
